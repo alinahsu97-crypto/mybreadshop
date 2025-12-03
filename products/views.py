@@ -1,7 +1,6 @@
-from django.shortcuts import render
-from .models import Product 
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
+from .cart import Cart
 
 # 首頁（最新消息）
 def home(request):
@@ -24,20 +23,23 @@ def product_list(request):
     products = Product.objects.all()
     return render(request, 'products/product_list.html', {'products': products})
 
-def cart_view(request):
-    # 這裡暫時先用空購物車測試
-    cart_items = []  # 之後會改成從 session 讀取
-    total_price = 0
-    return render(request, 'products/cart.html', {'cart_items': cart_items, 'total_price': total_price})
-
+# 🛒 加入購物車
 def add_to_cart(request, product_id):
-    # 1️⃣ 取得商品，如果不存在則返回 404
+    cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
-    # 2️⃣ 從 session 取得購物車，若不存在則用空字典
-    cart = request.session.get('cart', {})
-    # 3️⃣ 將商品加入購物車（已有則數量 +1，沒有則設為 1）
-    cart[str(product_id)] = cart.get(str(product_id), 0) + 1
-    # 4️⃣ 把更新後的購物車存回 session
-    request.session['cart'] = cart
-    # 5️⃣ 導向商品列表頁（或可以改成購物車頁面）
-    return redirect('product_list')
+    cart.add(product)
+    return redirect("cart_detail")  # 加完導向購物車頁或改 product_list
+
+# ❌ 移除購物車商品
+def remove_from_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+# 🧺 購物車內容頁
+def cart_detail(request):
+    #request.session['cart'] = {}  # ← 清空舊格式
+    cart = Cart(request)
+    return render(request, 'products/cart_detail.html', {'cart': cart})
+

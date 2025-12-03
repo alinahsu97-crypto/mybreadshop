@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>穀語手工窯烤麵包</title>
+<link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'products/css/cart.css' %}">
+</head>
+<body>
+
+<!-- Header 區塊 -->
+{% include 'products/header.html' %}
+
+<main class="cart-page">
+    <h2>我的購物車</h2>
+
+    {% if cart %}
+    
+    <!-- 購物車表格 -->
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>商品</th>
+                <th>價格</th>
+                <th>數量</th>
+                <th>小計</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in cart %}
+            <tr>
+
+                <!-- 商品資訊（含圖片 + 名稱） -->
+                <td class="product-info">
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    {% endif %}
+                    <span>{{ item.product.name }}</span>
+                </td>
+
+                <!-- 單價 -->
+                <td>${{ item.product.price }}</td>
+
+                <!-- 數量（之後可加入 + / - 按鈕） -->
+                <td>{{ item.quantity }}</td>
+
+                <!-- 小計 -->
+                <td>${{ item.total_price }}</td>
+
+                <!-- 刪除按鈕 -->
+                <td>
+                    <a href="{% url 'remove_from_cart' item.product.id %}" class="remove-btn">刪除</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    <!-- 這裡是結帳區塊：新增卡片框架、美化總計與結帳按鈕 -->
+    <div class="checkout-box">
+        
+        <!-- 總計金額 -->
+        <div class="checkout-total">
+            <span class="label">總計：</span>
+            <span class="price">${{ cart.get_total_price }}</span>
+        </div>
+
+        <!-- 結帳按鈕（之後會導到結帳流程頁） -->
+        <a href="#" class="checkout-button">前往結帳</a>
+
+    </div>
+
+    {% else %}
+    
+    <!-- 購物車空的狀態提示 -->
+    <p class="empty-cart">你的購物車是空的 😢</p>
+
+    {% endif %}
+</main>
+
+<!-- Footer 區塊 -->
+{% include 'products/footer.html' %}
+</body>
+</html>
