@@ -1,0 +1,18 @@
+{% load static %}
+<header>
+  <a href="{% url 'home' %}" class="brand">
+    <img src="{% static 'products/images/logo 1.png' %}" alt="網站 Logo" class="logo">
+    <h1>穀語手工窯烤麵包<br>GUYU BREAD</h1>
+  </a>
+  <nav>
+    <ul>
+      <li><a href="{% url 'home' %}">最新消息</a></li>
+      <li><a href="{% url 'about_us' %}">關於我們</a></li>
+      <li><a href="{% url 'about_bread' %}">麵包須知</a></li>
+      <li><a href="{% url 'product_list' %}">線上點餐</a></li>
+      <li><a href="{% url 'member' %}">會員專區</a></li>
+      <li><a href="{% url 'product_list' %}">商品列表</a></li>
+      <li><a href="{% url 'cart' %}">購物車</a></li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>穀語手工窯烤麵包</title>
+<link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+</head>
+<body class="home">
+
+<!-- Header 載入 -->
+{% include 'products/header.html' %}
+
+<section class="carousel">
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
+    <div class="carousel-indicators"></div>
+</section>
+
+<main>
+  <!-- 輪播區塊 -->
+
+  <!-- 最新消息 & 四張圖 -->
+  <h2>~~最新消息＆優惠~~</h2>
+  <section class="home-images">
+    <div class="image-row">
+      <img src="{% static 'products/images/no1.1.jpg' %}" alt="圖片1">
+      <img src="{% static 'products/images/no1.2.jpg' %}" alt="圖片2">
+    </div>
+    <div class="image-row">
+      <img src="{% static 'products/images/no1.3.jpg' %}" alt="圖片3">
+      <img src="{% static 'products/images/no1.4.jpg' %}" alt="圖片4">
+    </div>
+  </section>
+</main>
+
+<!-- Footer 載入 -->
+{% include 'products/footer.html' %}
+
+<script>
+  // 輪播程式碼
+  window.addEventListener("DOMContentLoaded", () => {
+    const imagePaths = [
+      "{% static 'products/images/num7.jpg' %}",
+      "{% static 'products/images/num1.jpg' %}",
+      "{% static 'products/images/num8.jpg' %}",
+      "{% static 'products/images/num9.jpg' %}"
+    ];
+
+    const carousel = document.querySelector(".carousel");
+    const indicators = document.querySelector(".carousel-indicators");
+    let home = 0;
+
+    // 建立圖片和圓點
+    imagePaths.forEach((path, i) => {
+      const img = document.createElement("img");
+      img.src = path;
+      if(i === 0) img.classList.add("active");
+      carousel.insertBefore(img, carousel.querySelector(".prev"));
+
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      if(i === 0) dot.classList.add("active");
+      dot.dataset.home = i;
+      indicators.appendChild(dot);
+    });
+
+    const images = document.querySelectorAll(".carousel img");
+    const dots = document.querySelectorAll(".carousel-indicators .dot");
+
+    function showImage(i) {
+      images.forEach(img => img.classList.remove("active"));
+      dots.forEach(dot => dot.classList.remove("active"));
+      images[i].classList.add("active");
+      dots[i].classList.add("active");
+    }
+
+    document.querySelector(".next").addEventListener("click", () => {
+      home = (home + 1) % images.length;
+      showImage(home);
+    });
+
+    document.querySelector(".prev").addEventListener("click", () => {
+      home = (home - 1 + images.length) % images.length;
+      showImage(home);
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        home = parseInt(dot.dataset.home);
+        showImage(home);
+      });
+    });
+
+    setInterval(() => {
+      home = (home + 1) % images.length;
+      showImage(home);
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>

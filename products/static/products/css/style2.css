@@ -1,0 +1,55 @@
+header{
+ display: flex;
+ justify-content: space-between;
+}
+
+.logo{
+  align-self: flex-end;
+}
+
+nav{
+ display: flex;
+}
+
+.navitem{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+nav{
+ position: relative;
+}
+.search{
+ position: absolute;
+ top:-40px;
+ right:0;
+}
+
+.navitem{
+ position: relative;
+}
+.navitem:hover{
+ top: -8px;
+}
+
+.navitem__icon{
+ width: 30px;
+ height: 20px;
+ background-image: url("dogs.jpg");
+ background-repeat: no-repeat;
+ background-position: 5px -2px;
+}
+nav .navitem:nth-child(2) .navitem__icon{
+ background-position: 5px -24px;
+}
+nav .navitem:nth-child(3) .navitem__icon{
+ background-position: 5px -45px;
+}
+nav .navitem:nth-child(4) .navitem__icon{
+ background-position: -42px -45px;
+}
+nav .navitem:nth-child(5) .navitem__icon{
+ background-position: -44px -23px;
+}
+

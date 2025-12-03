@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>穀語手工窯烤麵包</title>
+<link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+</head>
+<body>
+
+<!-- Header -->
+{% include 'products/header.html' %}
+
+<main>
+  <section class="home-images">
+    <div class="image-row">
+      <img src="{% static 'products/images/aboutbread1.jpg' %}" alt="圖片1">
+      <img src="{% static 'products/images/aboutbread2.jpg' %}" alt="圖片2">
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+{% include 'products/footer.html' %}
+
+</body>
+</html>

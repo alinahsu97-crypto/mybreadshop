@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>穀語手工窯烤麵包</title>
+<link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+</head>
+<body>
+
+<!-- Header -->
+{% include 'products/header.html' %}
+
+<main>
+  <section class="about-us">
+    <img src="{% static 'products/images/aboutus.jpg' %}" alt="關於我們圖片">
+
+    
+    <div class="about-text">
+      <h2 class="title-line">關於我們 About Us</h2>
+      <p class="content-line">
+
+穀語的理念/精神<br>
+現在許多人們都有腸胃問題或者對蛋奶過敏🤧<br>
+不僅長輩注重養生，年輕人也漸漸開始注重養生<br>
+但養生與健康主打的食品都讓人有刻板印象<br>
+就是"吃起來很乾"或者"不好吃"<br>
+穀語是由一群年輕夥伴一起建立學習各國麵包技術<br>
+為您打造天然健康、口感Q彈又美味的窯烤麵包!!!<br>
+已獲得許多知名烘焙品牌的麵包師傅的認可和讚許<br>
+也獲得許多熱愛麵包的饕客好評不斷<br>
+<br>
+歡迎各位朋友們，成為穀語的穀友<br>
+讓我們一起朝向健康飲食<br>
+穀語會讓您新鮮感不斷~~<br>
+
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+{% include 'products/footer.html' %}
+
+</body>
+</html>
