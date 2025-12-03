@@ -43,3 +43,11 @@ def cart_detail(request):
     cart = Cart(request)
     return render(request, 'products/cart_detail.html', {'cart': cart})
 
+
+def remove_one_from_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.subtract(product)
+    return redirect("cart_detail")
+
+
